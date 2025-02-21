@@ -10,6 +10,12 @@
 </head>
 <body>
     <h1>🚴🏼‍♀️BikeBubbles</h1>
+    <label for="Filter by time">
+        Filter by time
+        <input type="range" min="-1" max="1440" id="time-slider" value="-1">
+    </label>
+    <time id="selected-time"></time>
+    <em id="any-time">(any time)</em>
     <div id="map">
         <svg></svg>
     </div>

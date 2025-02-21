@@ -40,3 +40,17 @@ html, body {
     stroke: blue;
     pointer-events: auto;
 }
+
+em {
+    display: block;
+    margin-left: 32em;
+}
+
+time {
+    display: block;
+    margin-left: 32em;
+}
+
+input {
+    width: 500px;
+}
