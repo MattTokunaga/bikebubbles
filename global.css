@@ -36,9 +36,51 @@ html, body {
 
 #map svg circle {
     fill-opacity: .5;
-    fill: limegreen;
+
     stroke: blue;
     pointer-events: auto;
+}
+
+#map circle, .legend > div {
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+    --color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+    );
+    fill: var(--color);
+}
+
+div.legend {
+    display: flex;
+    margin-block: 1em;
+    justify-content: space-between;
+    gap: 1px;
+    width: 100%;
+}
+
+div.legend div {
+    flex: 1;
+    color: white;
+    padding: 5px;
+}
+
+div.legend :nth-child(1) {
+    text-align: left;
+    background-color: var(--color-departures);
+}
+div.legend :nth-child(3) {
+    text-align: right;
+    background-color: var(--color-arrivals);
+}
+div.legend :nth-child(2) {
+    text-align: center;
+    background-color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * .5),
+        var(--color-arrivals)
+    );
 }
 
 em {

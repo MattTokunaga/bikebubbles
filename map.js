@@ -54,6 +54,9 @@ let arrivalsByMinute = Array.from({length: 1440}, () => []);
 
 let maxRad;
 
+let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
+
+
 map.on('load', () => {
     // Load the nested JSON file
     const jsonurl = "bluebikes-stations.json"
@@ -132,7 +135,7 @@ map.on('load', () => {
         circles.each(function (d) {
             d3.select(this)
                 .append('title')
-                .text(`${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
+                .text(`${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`)
         })
 ;
         for (let trip of data) {
@@ -231,6 +234,7 @@ function filterTripsbyTime() {
     const circles = svg.selectAll('circle')
         .data(filteredStations);
     circles.attr('r', d => radiusScale(d.totalTraffic));
+    circles.style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic));
 }
 
 function filterByMinute(tripsByMinute, minute) {
